@@ -38,6 +38,19 @@ const createNextConfig = (phase) => {
   reactStrictMode: false,
   swcMinify: true,
 
+  webpack: (config, { isServer }) => {
+  if (isServer) {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+    };
+  }
+
+  return config;
+},
+
   // OpenNext/esbuild 使用 workerd condition 解析依赖。
   // @libsql/* 等包有 workerd 专用入口（如 web.cjs），Next NFT 默认只追踪 node 入口，
   // 导致 .open-next 里缺少 web.cjs 并报 Could not resolve "@libsql/isomorphic-ws"。
