@@ -9,6 +9,10 @@ const isCloudflare = process.env.CF_PAGES === '1' || process.env.BUILD_TARGET ==
 const isEdgeOne = process.env.EDGEONE_PAGES === '1' || process.env.BUILD_TARGET === 'edgeone';
 const isEdgeBuild = isCloudflare || isEdgeOne;
 
+console.log(
+  `[EdgeOne] isEdgeBuild=${isEdgeBuild}, isEdgeOne=${isEdgeOne}, BUILD_TARGET=${process.env.BUILD_TARGET}, EDGEONE_PAGES=${process.env.EDGEONE_PAGES}, webpackBuildWorker=${!isEdgeBuild}`
+);
+
 const optimizedPackageImports = [
   '@dnd-kit/core',
   '@dnd-kit/modifiers',
