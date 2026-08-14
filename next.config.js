@@ -43,7 +43,13 @@ const createNextConfig = (phase) => {
   // 导致 .open-next 里缺少 web.cjs 并报 Could not resolve "@libsql/isomorphic-ws"。
   // 声明为 server external 后，OpenNext 会完整拷贝这些包并应用 workerd 导出。
   // 参见: https://opennext.js.org/cloudflare/howtos/workerd
-
+  serverExternalPackages: [
+    '@libsql/client',
+    '@libsql/hrana-client',
+    '@libsql/isomorphic-ws',
+    '@libsql/isomorphic-fetch',
+    'libsql',
+  ],
 
   experimental: {
     instrumentationHook: process.env.NODE_ENV === 'production' && !isEdgeBuild,
